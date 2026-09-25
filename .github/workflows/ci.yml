@@ -9,6 +9,10 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   test-and-build:
     runs-on: ubuntu-latest
@@ -32,3 +36,20 @@ jobs:
       - name: Build Docker image
         run: docker build -t devops-lab:ci .
 
+      - name: Log in to GitHub Container Registry
+        if: github.event_name == 'push'
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io \
+            -u "${{ github.actor }}" --password-stdin
+
+      - name: Tag Docker image
+        if: github.event_name == 'push'
+        run: |
+          docker tag devops-lab:ci ghcr.io/emmy16-glitch/devops-lab:latest
+          docker tag devops-lab:ci ghcr.io/emmy16-glitch/devops-lab:${{ github.sha }}
+
+      - name: Push Docker image
+        if: github.event_name == 'push'
+        run: |
+          docker push ghcr.io/emmy16-glitch/devops-lab:latest
+          docker push ghcr.io/emmy16-glitch/devops-lab:${{ github.sha }}
