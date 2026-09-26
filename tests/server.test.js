@@ -13,6 +13,13 @@ test("GET /health returns status ok", async () => {
     });
 });
 
+test("GET / returns the homepage", async () => {
+    const response = await request(app).get("/");
+
+    assert.equal(response.statusCode, 200);
+    assert.equal(response.text, "My DevOps Lab is running!");
+});
+
 test("GET /version returns version 2.0.2", async () => {
     const response = await request(app).get("/version");
 
