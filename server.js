@@ -17,6 +17,13 @@ app.get("/version", (req, res) => {
     });
 });
 
+app.get("/status", (req, res) => {
+    res.json({
+        service: "devops-lab",
+        status: "running"
+    });
+});
+
 if (require.main === module) {
     app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`);
