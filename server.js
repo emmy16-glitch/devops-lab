@@ -4,7 +4,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
-    res.status(500).send("Something went wrong!");
+    res.send("My DevOps Lab is running!");
 });
 
 app.get("/health", (req, res) => {
@@ -13,7 +13,7 @@ app.get("/health", (req, res) => {
 
 app.get("/version", (req, res) => {
     res.json({
-        version: "2.0.3"
+        version: "2.0.2"
     });
 });
 
