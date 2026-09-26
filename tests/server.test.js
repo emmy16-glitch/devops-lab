@@ -28,3 +28,12 @@ test("GET /version returns version 2.0.2", async () => {
         version: "2.0.2"
     });
 });
+test("GET /status returns service status", async () => {
+    const response = await request(app).get("/status");
+
+    assert.equal(response.statusCode, 200);
+    assert.deepEqual(response.body, {
+        service: "devops-lab",
+        status: "running"
+    });
+});
