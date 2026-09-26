@@ -13,7 +13,7 @@ app.get("/health", (req, res) => {
 
 app.get("/version", (req, res) => {
     res.json({
-        version: "2.0.0"
+        version: "2.0.1"
     });
 
 });

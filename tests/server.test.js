@@ -13,11 +13,11 @@ test("GET /health returns status ok", async () => {
     });
 });
 
-test("GET /version returns version 2.0.0", async () => {
+test("GET /version returns version 2.0.1", async () => {
     const response = await request(app).get("/version");
 
     assert.equal(response.statusCode, 200);
     assert.deepEqual(response.body, {
-        version: "2.0.0"
+        version: "2.0.1"
     });
 });
